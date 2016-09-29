@@ -33,10 +33,10 @@ class ViewController: UIViewController, UITextViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.rightBarButtonItem?.title = NSString(string: "\u{2699}") as String
-        if let font = UIFont(name: "Helvetica", size: 18.0) {
-            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
-        }
+//        self.navigationItem.rightBarButtonItem?.title = NSString(string: "\u{2699}") as String
+//        if let font = UIFont(name: "Helvetica", size: 18.0) {
+//            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+//        }
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -46,11 +46,10 @@ class ViewController: UIViewController, UITextViewDelegate{
         
         let index : Int = defaults.integerForKey("THEME_OPTIONS_INDEX")
         tipPerBtn.tintColor = index == 0 ? self.view.tintColor : themeColor[index]
+        self.navigationItem.rightBarButtonItem?.tintColor = tipPerBtn.tintColor
         
         billAmt.becomeFirstResponder()
         billAmt.placeholder = NSLocale.currentLocale().objectForKey(NSLocaleCurrencySymbol) as? String ?? "$"
-        
-        billAmtHt.constant = (self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height)/2
         
         if(defaults.boolForKey("DISPLAY_4_OPTIONS")){
             if(tipPerBtn.numberOfSegments < 4){
@@ -61,8 +60,8 @@ class ViewController: UIViewController, UITextViewDelegate{
                 tipPerBtn.removeSegmentAtIndex(3, animated: false)
             }
         }
-        
-        self.calculatePricing()
+
+        self.billChanged(billAmt)
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,8 +76,8 @@ class ViewController: UIViewController, UITextViewDelegate{
             ht = (self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height)/2
         }
 
+        self.billAmtHt.constant = ht;
         UIView.animateWithDuration(0.5) {
-            self.billAmtHt.constant = ht;
             self.view.layoutIfNeeded()
         }
         
@@ -86,6 +85,10 @@ class ViewController: UIViewController, UITextViewDelegate{
     }
     
     func calculatePricing() {
+        
+        if(tipPerBtn.selectedSegmentIndex == -1){
+            tipPerBtn.selectedSegmentIndex = 0
+        }
         
         let billAmtVal = Double(billAmt.text!) ?? 0
         let tipSel = tipPerArr[tipPerBtn.selectedSegmentIndex]
