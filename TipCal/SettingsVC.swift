@@ -21,8 +21,11 @@ class SettingsVC: UIViewController {
         super.viewDidLoad()
         
         let defaults = NSUserDefaults.standardUserDefaults()
-
-        themeOptions.selectedSegmentIndex = defaults.objectForKey("THEME_OPTIONS_INDEX") != nil ? defaults.integerForKey("THEME_OPTIONS_INDEX") : 0
+        
+        tipOptionsSwitch.on = defaults.boolForKey("DISPLAY_4_OPTIONS")
+        self.tipOptionsChanged(tipOptionsSwitch)
+        
+        themeOptions.selectedSegmentIndex = defaults.integerForKey("THEME_OPTIONS_INDEX")
         self.themeOptionsChanged(themeOptions)
     }
     

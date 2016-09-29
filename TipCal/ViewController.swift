@@ -52,6 +52,16 @@ class ViewController: UIViewController, UITextViewDelegate{
         
         billAmtHt.constant = (self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height)/2
         
+        if(defaults.boolForKey("DISPLAY_4_OPTIONS")){
+            if(tipPerBtn.numberOfSegments < 4){
+                tipPerBtn.insertSegmentWithTitle("20%", atIndex: 3, animated: false)
+            }
+        }else{
+            if(tipPerBtn.numberOfSegments == 4){
+                tipPerBtn.removeSegmentAtIndex(3, animated: false)
+            }
+        }
+        
         self.calculatePricing()
     }
     
