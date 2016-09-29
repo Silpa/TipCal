@@ -12,6 +12,7 @@
 		E8973CDD1D9CE84A006EF4D8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8973CDB1D9CE84A006EF4D8 /* Main.storyboard */; };
 		E8973CDF1D9CE84A006EF4D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8973CDE1D9CE84A006EF4D8 /* Assets.xcassets */; };
 		E8973CE21D9CE84A006EF4D8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8973CE01D9CE84A006EF4D8 /* LaunchScreen.storyboard */; };
+		E8973CEC1D9D0F8E006EF4D8 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8973CEB1D9D0F8E006EF4D8 /* SettingsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		E8973CDE1D9CE84A006EF4D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E8973CE11D9CE84A006EF4D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E8973CE31D9CE84A006EF4D8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8973CEB1D9D0F8E006EF4D8 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				E8973CD71D9CE84A006EF4D8 /* AppDelegate.swift */,
 				E8973CD91D9CE84A006EF4D8 /* ViewController.swift */,
+				E8973CEB1D9D0F8E006EF4D8 /* SettingsVC.swift */,
 				E8973CDB1D9CE84A006EF4D8 /* Main.storyboard */,
 				E8973CDE1D9CE84A006EF4D8 /* Assets.xcassets */,
 				E8973CE01D9CE84A006EF4D8 /* LaunchScreen.storyboard */,
@@ -137,6 +140,7 @@
 			files = (
 				E8973CDA1D9CE84A006EF4D8 /* ViewController.swift in Sources */,
 				E8973CD81D9CE84A006EF4D8 /* AppDelegate.swift in Sources */,
+				E8973CEC1D9D0F8E006EF4D8 /* SettingsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

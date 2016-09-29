@@ -28,15 +28,33 @@ class ViewController: UIViewController, UITextViewDelegate{
     
     var tipPerArr = [10.0, 15.0, 18.0, 20.0]
     
+    var themeColor = [UIColor.blueColor(), UIColor.redColor(), UIColor.greenColor()]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        self.navigationItem.rightBarButtonItem?.title = NSString(string: "\u{2699}") as String
+        if let font = UIFont(name: "Helvetica", size: 18.0) {
+            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: font], forState: UIControlState.Normal)
+        }
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        
+        let index : Int = defaults.integerForKey("THEME_OPTIONS_INDEX")
+        tipPerBtn.tintColor = index == 0 ? self.view.tintColor : themeColor[index]
+        
         billAmt.becomeFirstResponder()
-        billAmtHt.constant = self.view.frame.size.height/2
+        billAmt.placeholder = NSLocale.currentLocale().objectForKey(NSLocaleCurrencySymbol) as? String ?? "$"
+        
+        billAmtHt.constant = (self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height)/2
         
         self.calculatePricing()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -45,7 +63,8 @@ class ViewController: UIViewController, UITextViewDelegate{
     @IBAction func billChanged(sender: AnyObject) {
         var ht : CGFloat = 100
         if(billAmt.text!.isEmpty){
-            ht = self.view.frame.size.height/2
+//            ht = self.view.frame.size.height/2
+            ht = (self.view.frame.size.height - self.navigationController!.navigationBar.frame.size.height)/2
         }
 
         UIView.animateWithDuration(0.5) {
@@ -63,12 +82,16 @@ class ViewController: UIViewController, UITextViewDelegate{
         let tipVal = billAmtVal/tipSel
         let totalVal = billAmtVal + tipVal
         
+        let formatter = NSNumberFormatter()
+        formatter.usesGroupingSeparator = true
+        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
+        formatter.locale = NSLocale.currentLocale() // This is the default
         
-        tip.text = String(format: "$%.2f", tipVal)
-        total1.text = String(format: "$%.2f", totalVal)
-        total2.text = String(format: "$%.2f", totalVal/2)
-        total3.text = String(format: "$%.2f", totalVal/3)
-        total4.text = String(format: "$%.2f", totalVal/4)
+        tip.text = formatter.stringFromNumber(tipVal) //String(format: "$%.2f", tipVal)
+        total1.text = formatter.stringFromNumber(totalVal)
+        total2.text = formatter.stringFromNumber(totalVal/2)
+        total3.text = formatter.stringFromNumber(totalVal/3)
+        total4.text = formatter.stringFromNumber(totalVal/4)
         
     }
 
