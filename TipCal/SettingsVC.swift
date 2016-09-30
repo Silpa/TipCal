@@ -14,8 +14,11 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var tipOptionsSwitch: UISwitch!
     
     @IBOutlet weak var themeOptions: UISegmentedControl!
+    @IBOutlet weak var howToTipBtn: UIButton!
     
     var themeColor = [UIColor.blueColor(), UIColor.redColor(), UIColor.greenColor()]
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +51,15 @@ class SettingsVC: UIViewController {
         self.tipOptionsSwitch.onTintColor = selThemeColor
         self.themeOptions.tintColor = selThemeColor
         self.navigationController?.navigationBar.tintColor = selThemeColor
+        self.howToTipBtn.tintColor = selThemeColor
         
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setInteger(themeOptions.selectedSegmentIndex, forKey:"THEME_OPTIONS_INDEX")
+    }
+    
+    
+    @IBAction func howToTip(sender: AnyObject) {
+        let url = NSURL(string: "http://www.cntraveler.com/stories/2008-11-11/etiquette-101-tipping-guide")!
+        UIApplication.sharedApplication().openURL(url)
     }
 }
